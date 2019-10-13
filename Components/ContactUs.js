@@ -1,11 +1,50 @@
 import React, { Component } from 'react'
 import { View, Text, Picker, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
+import email from 'react-native-email'
 class ContactUs extends Component {
+    constructor() {
+        super();
+        this.state = {
+            Name: '',
+            College: '',
+            Subject: '',
+            Message: '',
+        }
+    }
+    changeName = val => {
+        this.setState({
+            Name: val,
+        })
+    }
+    changeCollege = val => {
+        this.setState({
+            College: val
+        })
+    }
+    changeSubject = val => {
+        this.setState({
+            Subject: val
+        })
+    }
+    changeMessage = val => {
+        this.setState({
+            Message: val
+        })
+    }
+    handleEmail = () => {
+        const to = ['vins.brainstorm@gmail.com'] // string or array of email addresses
+        email(to, {
+body: `Name : { ${this.state.Name} }
+College : { ${this.state.College} }
+Subject : { ${this.state.Subject} }
+Message : { ${this.state.Message} }`
+        }).catch(console.error)
+    }
 
     render() {
-        const fields = ['NAME', 'COLLEGE']
-        const subjects = ['Due to bug']
-        const Item = Picker.item
+        console.log(this.state)
+        const subjects = ['Please Select Any....', 'Due to bug', 'Extra']
+        const Item = Picker.Item
         return (
 
 
@@ -15,18 +54,19 @@ class ContactUs extends Component {
                     <Text style={{ textAlign: 'center' }}>We are happy to improve , Please Drop us Mail</Text>
                 </View>
                 <View style={{ paddingLeft: 5 }}>
-                    {
-                        fields.map((item) => {
-                            return (
-                                <View>
-                                    <Text style={styles.middle}>{item}</Text>
-                                    <TextInput style={styles.textinput} />
-                                </View>
-                            )
-                        })
-                    }
+
+                    <View>
+                        <Text style={styles.middle}>Name</Text>
+                        <TextInput onChangeText={this.changeName} style={styles.textinput} />
+                    </View>
+                    <View>
+                        <Text style={styles.middle}>College</Text>
+                        <TextInput onChangeText={this.changeCollege} style={styles.textinput} />
+                    </View>
+
                     <Text style={styles.middle}>SUBJECT</Text>
-                    <Picker>
+                    <Picker onValueChange={this.changeSubject}
+                        selectedValue={this.state.Subject}>
                         {
                             subjects.map((item, key) => {
                                 return (<Item key={key} label={item} value={item} />);
@@ -34,10 +74,10 @@ class ContactUs extends Component {
                         }
                     </Picker>
                     <Text style={styles.middle}>MESSAGE</Text>
-                    <TextInput multiline={true} numberOfLines={10} style={{ height: 100, borderColor: 'gray', textAlignVertical: 'top', borderWidth: 1 }} />
+                    <TextInput onChangeText={this.changeMessage} multiline={true} numberOfLines={10} style={{ height: 100, borderColor: 'gray', textAlignVertical: 'top', borderWidth: 1 }} />
                 </View>
                 <View style={styles.btn}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity onPress={this.handleEmail} style={styles.button}>
                         <Text style={{ fontFamily: "Comic Sans MS", fontSize: 20, color: 'white', marginTop: 3 }}>SEND MESSAGE</Text>
                     </TouchableOpacity>
                 </View>

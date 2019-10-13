@@ -13,8 +13,10 @@ import MyDownloads from '../MyDownloads';
 import MySubjects from '../MySubjects';
 import Profile from '../Profile'
 import Share from '../Share'
+import Login from '../Login';
+import Register from '../Register';
 
-class NavigationDrawerStructure extends Component {
+export class NavigationDrawerStructure extends Component {
 
     toggleDrawer = () => {
         this.props.navigationProps.openDrawer();
@@ -165,6 +167,35 @@ const Share_ = createStackNavigator({
         }),
     },
 })
+const Login_ = createStackNavigator({
+    Tenth: {
+        screen: Login,
+        navigationOptions: ({ navigation }) => ({
+            title: 'Login',
+            headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+            headerStyle: {
+                backgroundColor: '#00b8ff',
+            },
+            headerTintColor: '#fff',
+
+        }),
+    },
+})
+
+const Register_ = createStackNavigator({
+    Eleventh: {
+        screen: Register,
+        navigationOptions: ({ navigation }) => ({
+            title: 'Login',
+            headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+            headerStyle: {
+                backgroundColor: '#00b8ff',
+            },
+            headerTintColor: '#fff',
+
+        }),
+    },
+})
 const DrawerNavigatorExample = createDrawerNavigator({
     MySubjects: { screen: MySubjects_ },
     Notes: { screen: Notes_, },
@@ -175,16 +206,27 @@ const DrawerNavigatorExample = createDrawerNavigator({
     Profile: { screen: Profile_ },
     MyDownloads: { screen: MyDownloads_ },
     Share: { screen: Share_ },
+    Login: {screen: Login_},
+    Register: {screen: Register_}
 
 }, {
     initialRouteName: 'MySubjects',
     contentComponent: SideMenu,
-    drawerWidth: Dimensions.get('window').width - 200,
+    drawerWidth: Dimensions.get('window').width - 150,
     drawerBackgroundColor: 'white',
     drawerType: 'back',
 
 }
 )
+
+const SignedOut = createStackNavigator({
+    Login:{
+        screen:Login
+    },
+    Register:{
+        screen:Register
+    }
+})
 const styles = {
     logo: {
         width: 35,
@@ -193,7 +235,7 @@ const styles = {
         marginTop: 5,
         backgroundColor: 'black',
         position: 'absolute',
-        left: Dimensions.get('window').width - 70,
+        left: Dimensions.get('window').width - 60,
     },
 }
 export default createAppContainer(DrawerNavigatorExample);

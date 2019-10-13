@@ -3,12 +3,21 @@ import { View, Picker, StyleSheet, Text, TouchableOpacity, Image,Dimensions } fr
 
 
 class Notes extends Component {
+    constructor() {
+        super()
 
+        this.state = {
+            semester: '',
+            branch: '',
+            subjects: ''
+
+        }
+    }
     render() {
-        const semester = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th']
-        const branch = ['CSE', 'CIVIL', 'EE', 'EEE', 'ECE', 'ME', 'AUTOMOBILE']
-        const subjects = ['Empty']
-        const Item = Picker.item
+        const semester = ['Please Select Any...','1st', '2nd', '3rd', '4th', '5th', '6th', '7th']
+        const branch = ['Please Select Any...','CSE', 'CIVIL', 'EE', 'EEE', 'ECE', 'ME', 'AUTOMOBILE']
+        const subjects = ['Please Select Any...','Empty']
+        const Item = Picker.Item
         return (
 
             <View>
@@ -20,7 +29,10 @@ class Notes extends Component {
                 <View>
                     <View style={{ borderWidth: 1, margin: 5, borderRadius: 10 }}>
                         <Text style={styles.heading2}>SELECT SEMESTER</Text>
-                        <Picker itemStyle={styles.picker}>
+                        <Picker itemStyle={styles.picker} onValueChange={(itemValue, itemIndex) =>
+                                this.setState({ semester: itemValue })
+                            }
+                            selectedValue={this.state.semester}>
                             {
                                 semester.map((item, key) => {
                                     return (<Item key={key} label={item} value={item} />);
@@ -30,7 +42,10 @@ class Notes extends Component {
                     </View>
                     <View style={{ borderWidth: 1, margin: 5, borderRadius: 10 }}>
                         <Text style={styles.heading2}>SELECT BRANCH</Text>
-                        <Picker style={styles.picker}>
+                        <Picker style={styles.picker} onValueChange={(itemValue, itemIndex) =>
+                                this.setState({ branch: itemValue })
+                            }
+                            selectedValue={this.state.branch}>
                             {
                                 branch.map((item, key) => {
                                     return (<Item key={key} label={item} value={item} />);
@@ -40,7 +55,10 @@ class Notes extends Component {
                     </View>
                     <View style={{ borderWidth: 1, margin: 5, borderRadius: 10 }}>
                         <Text style={styles.heading2}>SELECT SUBJECT</Text>
-                        <Picker style={styles.picker}>
+                        <Picker style={styles.picker} onValueChange={(itemValue, itemIndex) =>
+                                this.setState({ subjects: itemValue })
+                            }
+                            selectedValue={this.state.subjects}>
                             {
                                 subjects.map((item, key) => {
                                     return (<Item key={key} label={item} value={item} />);

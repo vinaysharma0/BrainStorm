@@ -16,7 +16,7 @@ export default class App extends Component {
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="#00b8ff" barStyle="light-content" />
         <Navigator />
-        {/* <ImageBackground source={require('./Components/logo/BRAINSTORM_logo2.png')} style={styles.backgroundImage} > */}{/* </ImageBackground> */}
+        {/* <ImageBackground source={require('./Components/logo/BRAINSTORM_logo2.png')} style={styles.backgroundImage} ></ImageBackground> */}
         {/* <Register/> */}
         {/* <Login /> */}
       </View>
@@ -26,18 +26,18 @@ export default class App extends Component {
 
 
 }
-// const styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
-//   backgroundImage: {
-//     width: '100%',
-//     height: '100%',
-//     flex: 1,
-//     resizeMode: 'cover',
-//     position: 'absolute',
-//     top: '50%',
-//     left: '50%',
-//     transform: [{ translateX: -100 }, { translateY: -100 }],
-//     opacity: 0.3
-  // },
-// })
+  backgroundImage: {
+    width: 180,
+    height: 180,
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -100 }, { translateY: -100 }],
+    opacity: 0.3
+  },
+})
 

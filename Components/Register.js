@@ -1,28 +1,86 @@
 import React, { Component } from 'react'
-import { Text, View, Image, TextInput, StyleSheet, ImageBackground } from 'react-native';
+import { Text, View,KeyboardAvoidingView, Image, TextInput, StyleSheet, ImageBackground } from 'react-native';
 import { TouchableHighlight, ScrollView } from 'react-native-gesture-handler';
+import fire from './Config';
 
-show = () => {
-    alert('clicked')
-}
-const fields = ['Name','Email', 'College', 'Password']
+
 
 class Register extends Component {
+    constructor() {
+        super()
+    
+        this.state = {
+             email:'',
+             password:''
+        }
+        this.fields = [{
+            fieldName:'Name',
+            method:this.changeName
+        },
+        {
+            fieldName:'Email',
+            method:this.changeEmail
+        },
+        {
+            fieldName:'College',
+            method:this.changeCollege
+        },
+        {
+            fieldName:'Password',
+            method:this.changePassword
+        }]
+    }
+
+    changeEmail = val => {
+        this.setState({
+            email:val
+        })
+    }
+    changePassword = val => {
+        this.setState({
+            password:val
+        })
+    }
+    // changeEmail = val => {
+    //     this.setState({
+    //         email:val
+    //     })
+    // }
+    // changePassword = val => {
+    //     this.setState({
+    //         password:val
+    //     })
+    // }
+
+    handleSubmit = () => {
+        console.log('function')
+        fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(()=>console.log('You are successfully registered!!'))
+        .catch((error)=>console.log(error))
+    }
+
+    
+    
     render() {
+        console.log(this.state)
         return (
             
             <ImageBackground source={require('./logo/login_background.png')} style={styles.backgroundImage}>
+                
                 <View style={{ alignSelf: 'center' }}>
+                    <KeyboardAvoidingView behavior = "position">
                     <View style={{ alignSelf: 'center' }}>
                         <Image source={require('../Components/logo/BRAINSTORM_logo.png')} />
                     </View>
                     <View>
                         {
-                            fields.map((item) => {
+                            this.fields.map((item) => {
                                 return (
                                     <View>
-                                        <Text style={{ textAlign: 'left', fontSize: 15 }}>{item}</Text>
-                                        <TextInput placeholder={item} style={styles.textInput} />
+                                        <Text style={{ textAlign: 'left', fontSize: 15 }}>{item.fieldName}</Text>
+                                        <TextInput placeholder={item.fieldName} style={styles.textInput}
+                                        onChangeText={item.method}
+                                         />
                                     </View>
                                 )
                             })
@@ -30,7 +88,9 @@ class Register extends Component {
                         }
                     </View>
                     <View>
-                        <TouchableHighlight underlayColor= 'grey' onPress={() => show()} style={styles.btn}>
+                        <TouchableHighlight underlayColor= 'grey' 
+                            onPress={this.handleSubmit}
+                         style={styles.btn}>
                             <Text style={{color:'white', textAlign: 'center', paddingTop: 8, fontSize: 20 }}>Sign Up</Text>
                         </TouchableHighlight>
                         <Text>Already have an Account ?</Text>
@@ -38,7 +98,9 @@ class Register extends Component {
                             <Text style={{color:'white', textAlign: 'center', paddingTop: 8, fontSize: 20 }}>Login</Text>
                         </TouchableHighlight>
                     </View>
+                    </KeyboardAvoidingView>
                 </View>
+                
             </ImageBackground>
             
         )

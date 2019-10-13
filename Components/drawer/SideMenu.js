@@ -67,11 +67,11 @@ class SideMenu extends Component {
         <ScrollView>
           <View>
             {this.options.map((option, key) => (
-              <View>
+              <View key={key}>
                 <Text style={styles.mainHeading}>{option.mainHeading}</Text>
                 {option.subOptions.map((item, key) => (
-                  <TouchableHighlight underlayColor='lightgrey' style={styles.touch} onPress={this.navigateToScreen(item.navigationPath)}>
-                    <View style={styles.secondaryHeading} key={key}>
+                  <TouchableHighlight underlayColor='lightgrey' key={key} style={styles.touch} onPress={this.navigateToScreen(item.navigationPath)}>
+                    <View style={styles.secondaryHeading}>
                       <Text style={{ color: 'grey' }}>
                         {item.secondaryHeading}
                       </Text>
