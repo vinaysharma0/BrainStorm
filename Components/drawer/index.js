@@ -2,7 +2,7 @@ import { createAppContainer } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import Notes from '../Notes';
 import QuesPaper from '../QuesPaper';
 import PracticalFiles from '../PracticalFiles';
@@ -15,6 +15,9 @@ import Profile from '../Profile'
 import Share from '../Share'
 import Login from '../Login';
 import Register from '../Register';
+import Loader from '../loader';
+import SplashScreen from '../SplashScreen';
+import Consult from '../Consult';
 
 export class NavigationDrawerStructure extends Component {
 
@@ -34,17 +37,17 @@ export class NavigationDrawerStructure extends Component {
                         style={{ width: 30, height: 40, marginLeft: 10 }}
                     />
                 </TouchableOpacity>
-
                 <Image
                     source={require('../logo/BRAINSTORM_logo2.png')}
                     style={styles.logo}
                 />
             </View>
+
         )
     }
 }
 const MySubjects_ = createStackNavigator({
-    First: {
+    MySubjects: {
         screen: MySubjects,
         navigationOptions: ({ navigation }) => ({
             title: 'My Subjects',
@@ -59,7 +62,7 @@ const MySubjects_ = createStackNavigator({
 });
 
 const QuesPaper_ = createStackNavigator({
-    Second: {
+    QuesPaper: {
         screen: QuesPaper,
         navigationOptions: ({ navigation }) => ({
             title: 'Question Papers',
@@ -73,7 +76,7 @@ const QuesPaper_ = createStackNavigator({
 });
 
 const PracticalFiles_ = createStackNavigator({
-    Third: {
+    PracticalFiles: {
         screen: PracticalFiles,
         navigationOptions: ({ navigation }) => ({
             title: 'Practical Files',
@@ -87,7 +90,7 @@ const PracticalFiles_ = createStackNavigator({
 });
 
 const Syllabus_ = createStackNavigator({
-    Fourth: {
+    Syllabus: {
         screen: Syllabus,
         navigationOptions: ({ navigation }) => ({
             title: 'Syllabus',
@@ -101,7 +104,7 @@ const Syllabus_ = createStackNavigator({
 })
 
 const ContactUs_ = createStackNavigator({
-    Fifth: {
+    ContactUs: {
         screen: ContactUs,
         navigationOptions: ({ navigation }) => ({
             title: 'Contact Us',
@@ -114,7 +117,7 @@ const ContactUs_ = createStackNavigator({
     },
 })
 const Profile_ = createStackNavigator({
-    Sixth: {
+    Profile: {
         screen: Profile,
         navigationOptions: ({ navigation }) => ({
             title: 'Profile',
@@ -127,7 +130,7 @@ const Profile_ = createStackNavigator({
     },
 })
 const MyDownloads_ = createStackNavigator({
-    Seventh: {
+    MyDownloads: {
         screen: MyDownloads,
         navigationOptions: ({ navigation }) => ({
             title: 'My Downloads',
@@ -140,7 +143,7 @@ const MyDownloads_ = createStackNavigator({
     },
 })
 const Notes_ = createStackNavigator({
-    Eighth: {
+    Notes: {
         screen: Notes,
         navigationOptions: ({ navigation }) => ({
             title: 'Notes',
@@ -154,7 +157,7 @@ const Notes_ = createStackNavigator({
     },
 })
 const Share_ = createStackNavigator({
-    Ninth: {
+    Share: {
         screen: Share,
         navigationOptions: ({ navigation }) => ({
             title: 'Share',
@@ -168,7 +171,7 @@ const Share_ = createStackNavigator({
     },
 })
 const Login_ = createStackNavigator({
-    Tenth: {
+    Login: {
         screen: Login,
         navigationOptions: ({ navigation }) => ({
             title: 'Login',
@@ -177,16 +180,63 @@ const Login_ = createStackNavigator({
                 backgroundColor: '#00b8ff',
             },
             headerTintColor: '#fff',
-
         }),
     },
+},{
+    headerMode : 'none',
+
 })
 
 const Register_ = createStackNavigator({
-    Eleventh: {
+    Register: {
         screen: Register,
         navigationOptions: ({ navigation }) => ({
-            title: 'Login',
+            title: 'Register',
+            headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+            headerStyle: {
+                backgroundColor: '#00b8ff',
+            },
+            headerTintColor: '#fff',
+        }),
+    },
+},{
+    headerMode : 'none',
+})
+const Loader_ = createStackNavigator({
+    Loader: {
+        screen: Loader,
+        navigationOptions: ({ navigation }) => ({
+            headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+            headerStyle: {
+                backgroundColor: '#00b8ff',
+            },
+            headerTintColor: '#fff',
+
+        }),
+    },
+},{
+    headerMode : 'none',
+})
+const SplashScreen_ = createStackNavigator({
+    SplashScreen: {
+        screen: SplashScreen,
+        navigationOptions: ({ navigation }) => ({
+            headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+            headerStyle: {
+                backgroundColor: '#00b8ff',
+            },
+            headerTintColor: '#fff',
+
+        }),
+    },
+},{
+    headerMode : 'none',
+})
+const Consult_ = createStackNavigator({
+    Consult: {
+        screen: Consult,
+        title: 'Consultancy',
+        navigationOptions: ({ navigation }) => ({
             headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
             headerStyle: {
                 backgroundColor: '#00b8ff',
@@ -197,6 +247,7 @@ const Register_ = createStackNavigator({
     },
 })
 const DrawerNavigatorExample = createDrawerNavigator({
+    
     MySubjects: { screen: MySubjects_ },
     Notes: { screen: Notes_, },
     QuesPaper: { screen: QuesPaper_ },
@@ -206,34 +257,37 @@ const DrawerNavigatorExample = createDrawerNavigator({
     Profile: { screen: Profile_ },
     MyDownloads: { screen: MyDownloads_ },
     Share: { screen: Share_ },
-    Login: {screen: Login_},
-    Register: {screen: Register_}
+    Consult: { screen: Consult_ },
+    Register: {screen: Register_,navigationOptions: {
+        drawerLockMode: 'locked-closed',
+    }}, 
+    Login: {screen: Login_,navigationOptions: {
+        drawerLockMode: 'locked-closed',
+    }},
+    Loader: {screen: Loader_,navigationOptions: {
+        drawerLockMode: 'locked-closed',
+    }},
+    SplashScreen: {screen: SplashScreen_,navigationOptions: {
+        drawerLockMode: 'locked-closed',
+    }},
 
 }, {
-    initialRouteName: 'MySubjects',
+    initialRouteName: 'SplashScreen',
     contentComponent: SideMenu,
-    drawerWidth: Dimensions.get('window').width - 150,
+    drawerWidth: Dimensions.get('window').width - 170,
     drawerBackgroundColor: 'white',
     drawerType: 'back',
 
 }
 )
-
-const SignedOut = createStackNavigator({
-    Login:{
-        screen:Login
-    },
-    Register:{
-        screen:Register
-    }
-})
 const styles = {
     logo: {
         width: 35,
         height: 35,
         marginLeft: 5,
         marginTop: 5,
-        backgroundColor: 'black',
+        borderRadius: 5,
+        backgroundColor: 'white',
         position: 'absolute',
         left: Dimensions.get('window').width - 60,
     },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Picker, Image, StyleSheet, Text, Button, TouchableOpacity } from 'react-native'
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
 export default class PracticalFile extends Component {
@@ -23,7 +23,7 @@ export default class PracticalFile extends Component {
         return (
             <View>
                 <View style={styles.head}>
-                    <Image style={{ width: 100, height: 100, marginTop: 10, marginLeft: 10 }} source={require('./logo/practical.png')} />
+                    <Image style={{ width: wp('26'), height: hp('14'), marginTop: 10, marginLeft: 10 }} source={require('./logo/practical.png')} />
                     <Text style={styles.heading1}>Trying to find Practicals ?</Text>
                 </View>
                 <View>
@@ -85,18 +85,18 @@ const styles = StyleSheet.create({
         fontSize: 25,
         position: 'absolute',
         top: '40%',
-        right: '10%',
+        right: '2%',
         fontFamily: "Comic Sans MS",
     },
     button: {
         alignItems: 'center',
         backgroundColor: '#00b8ff',
-        padding: 5,
-        height: 40,
+        paddingTop: 8,
+        height: hp('5'),
         borderRadius: 5
     },
     head: {
-        height: 130,
+        height: hp('20%'),
     },
     heading2: {
         fontSize: 10,

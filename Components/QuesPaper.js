@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image, View, Picker, StyleSheet, Text, TouchableOpacity } from 'react-native'
-
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 class QuesPaper extends Component {
     constructor() {
         super()
@@ -21,7 +21,7 @@ class QuesPaper extends Component {
         return (
             <View>
                 <View style={styles.head}>
-                    <Image style={{ width: 100, height: 100, marginTop: 10, marginLeft: 10 }} source={require('./logo/quespaper.png')} />
+                    <Image style={{ width: wp('20'), height: hp('12'), marginTop: 20, marginLeft: 20 }} source={require('./logo/quespaper.png')} />
                     <Text style={styles.heading1}>Get Question Papers !</Text>
                 </View>
                 <View style={{ borderWidth: 1, margin: 5, borderRadius: 10 }}>
@@ -80,19 +80,19 @@ const styles = StyleSheet.create({
         fontSize: 25,
         position: 'absolute',
         top: '40%',
-        right: '10%',
+        right: '7%',
         fontFamily: "Comic Sans MS",
 
     },
     button: {
         alignItems: 'center',
         backgroundColor: '#00b8ff',
-        padding: 5,
-        height: 40,
+        paddingTop: 8,
+        height: hp('5'),
         borderRadius: 5
     },
     head: {
-        height: 130,
+        height: hp('20%'),
     },
     heading2: {
         fontSize: 10,

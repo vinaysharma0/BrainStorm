@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Picker, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
 import email from 'react-native-email'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 class ContactUs extends Component {
     constructor() {
         super();
@@ -32,14 +33,25 @@ class ContactUs extends Component {
         })
     }
     handleEmail = () => {
+        if((this.state.Name && this.state.College && this.state.Message)!=""){
         const to = ['vins.brainstorm@gmail.com'] // string or array of email addresses
         email(to, {
 body: `Name : { ${this.state.Name} }
 College : { ${this.state.College} }
 Subject : { ${this.state.Subject} }
 Message : { ${this.state.Message} }`
-        }).catch(console.error)
+        }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            console.log(error)
+          });
     }
+    else{
+    alert('Fill all the Mandatory Fields !')
+    }
+}
 
     render() {
         console.log(this.state)
@@ -64,7 +76,7 @@ Message : { ${this.state.Message} }`
                         <TextInput onChangeText={this.changeCollege} style={styles.textinput} />
                     </View>
 
-                    <Text style={styles.middle}>SUBJECT</Text>
+                    <Text style={styles.middle}>Subject</Text>
                     <Picker onValueChange={this.changeSubject}
                         selectedValue={this.state.Subject}>
                         {
@@ -73,13 +85,16 @@ Message : { ${this.state.Message} }`
                             })
                         }
                     </Picker>
-                    <Text style={styles.middle}>MESSAGE</Text>
+                    <Text style={styles.middle}>Message</Text>
                     <TextInput onChangeText={this.changeMessage} multiline={true} numberOfLines={10} style={{ height: 100, borderColor: 'gray', textAlignVertical: 'top', borderWidth: 1 }} />
                 </View>
                 <View style={styles.btn}>
                     <TouchableOpacity onPress={this.handleEmail} style={styles.button}>
-                        <Text style={{ fontFamily: "Comic Sans MS", fontSize: 20, color: 'white', marginTop: 3 }}>SEND MESSAGE</Text>
+                        <Text style={{ fontFamily: "Comic Sans MS", fontSize: 20, color: 'white'}}>Send Message</Text>
                     </TouchableOpacity>
+                </View>
+                <View style={{paddingLeft:5,paddingTop:20,flex:1,flexWrap:'wrap',flexDirection:'row'}}>
+                <Text style={{fontWeight:'bold'}}>Note : </Text><Text>If you want to upload screenshot. You can do it after you are redirected to Gmail.</Text>
                 </View>
             </ScrollView>
 
@@ -97,8 +112,8 @@ const styles = {
     button: {
         alignItems: 'center',
         backgroundColor: '#00b8ff',
-        padding: 5,
-        height: 40,
+        paddingTop: 8,
+        height: hp('5'),
         borderRadius: 5
     },
     textinput: {
